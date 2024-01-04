@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: demo
+spec:
+  secretName: demo
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: nginx.c56e6787-36ad-415e-901d-e831c26c3b79.k8s.civo.com
+  dnsNames:
+  - nginx.c56e6787-36ad-415e-901d-e831c26c3b79.k8s.civo.com

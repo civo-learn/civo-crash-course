@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-app-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  rules:
+  - host: nginx.c56e6787-36ad-415e-901d-e831c26c3b79.k8s.civo.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: my-app-service
+            port:
+              number: 80
+  tls:
+  - hosts:
+    - nginx.c56e6787-36ad-415e-901d-e831c26c3b79.k8s.civo.com
+    secretName: demo
+

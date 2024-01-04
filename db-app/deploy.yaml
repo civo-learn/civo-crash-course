@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: my-app
+        image: saiyam911/civo-course:v1
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: mysql-secret-volume
+          mountPath: /etc/mysql-secret
+          readOnly: true
+      volumes:
+      - name: mysql-secret-volume
+        secret:
+          secretName: mysql-secret
+

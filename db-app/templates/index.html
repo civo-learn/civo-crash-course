@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Goals 2024</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container { width: 80%; margin: 0 auto; }
+        h2 { text-align: center; }
+        .goal-list { list-style-type: none; padding: 0; }
+        .goal-item { margin: 10px 0; }
+        .delete-button { color: red; margin-left: 10px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Your Goals for 2024</h2>
+        <form action="/add_goal" method="post">
+            <input type="text" name="goal_name" placeholder="Enter your goal">
+            <button type="submit">Add Goal</button>
+        </form>
+        <ul class="goal-list">
+            {% for goal in goals %}
+                <li class="goal-item">
+                    {{ goal[1] }}
+                    <form action="/remove_goal" method="post" style="display: inline;">
+                        <input type="hidden" name="goal_id" value="{{ goal[0] }}">
+                        <button type="submit" class="delete-button">Delete</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <script>
+        document.querySelectorAll('form').forEach(form => {
+            form.onsubmit = () => setTimeout(() => location.reload(), 500); // Reload page after a short delay
+        });
+    </script>
+</body>
+</html>
+
